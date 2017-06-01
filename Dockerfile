@@ -11,14 +11,14 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 # Install basics
 RUN apt update \
-    && apt install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
+    && apt-get install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
 
     && git config --global user.email "paapaabdullahm@gmail.com" \
     && git config --global user.name "Paapa Abdullah Morgan" \
 
     && curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
-    && apt install -y nodejs \
+    && apt-get install -y nodejs \
     && npm install -g npm@"$NPM_VERSION" \
     && npm install -g cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" \
     && gem install sass \
@@ -26,18 +26,20 @@ RUN apt update \
 
 
 #JAVA STUFF
-    && add-apt-repository ppa:webupd8team/java -y \
-    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections \
-    && apt update && apt -y install oracle-java7-installer \
+    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
+    && add-apt-repository -y ppa:webupd8team/java \
+    && apt-get update \
+    && apt-get install -y oracle-java8-installer \
 
 #ANDROID STUFF
     && echo ANDROID_HOME="${ANDROID_HOME}" >> /etc/environment \
     && dpkg --add-architecture i386 \
-    && apt update \
-    && apt install -y --force-yes expect ant wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 qemu-kvm kmod \
-    && apt clean \
-    && apt autoclean \
+    && apt-get update \
+    && apt-get install -y --force-yes expect ant wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 qemu-kvm kmod \
+    && apt-get clean \
+    && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && rm -rf /var/cache/oracle-jdk8-installer
 
 # Install Android SDK
     && cd /opt \
