@@ -13,9 +13,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt update \
     && apt install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
 
-    && mkdir -P /curldown && chmod -R 777 /curldown \
-    && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION -o /curldown/nodesource_setup.sh \
-    && bash /curldown/nodesource_setup.sh \
+    && curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
+    && bash nodesource_setup.sh \
     && apt install -y nodejs \
     
     && npm install -g npm@"$NPM_VERSION" \
