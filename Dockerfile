@@ -13,6 +13,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt update \
     && apt install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
 
+    && git config --global user.email "paapaabdullahm@gmail.com" \
+    && git config --global user.name "Paapa Abdullah Morgan" \
+
     && curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt install -y nodejs \
