@@ -7,12 +7,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
     NODE_VERSION=6.10.3 \
     NPM_VERSION=5.0.1 \
     IONIC_VERSION=3.3.0 \
-    CORDOVA_VERSION=7.x
+    CORDOVA_VERSION=7.0.0
 
 # Install basics
 RUN apt update \
-    && apt install -y python-software-properties software-properties-common \
-    build-essential git wget curl unzip ruby \
+    && apt install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
 
     && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
@@ -29,7 +28,8 @@ RUN apt update \
 
 #JAVA STUFF
     && add-apt-repository ppa:webupd8team/java -y \
-    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/&& debconf-set-selections \
+    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/ \
+    && debconf-set-selections \
     && apt update && apt -y install oracle-java7-installer \
 
 #ANDROID STUFF
