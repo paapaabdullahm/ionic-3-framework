@@ -16,13 +16,9 @@ RUN apt update \
     && curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt install -y nodejs \
-    
     && npm install -g npm@"$NPM_VERSION" \
     && npm install -g cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" \
-    && npm cache clear \
-
     && gem install sass \
-
     && ionic start myApp sidemenu \
 
 
