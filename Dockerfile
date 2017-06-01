@@ -9,13 +9,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
     IONIC_VERSION=3.3.0 \
     CORDOVA_VERSION=7.0.0
 
-# Install basics
+#BASIC STUFF
 RUN apt update \
     && apt-get install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
-
     && git config --global user.email "paapaabdullahm@gmail.com" \
     && git config --global user.name "Paapa Abdullah Morgan" \
-
     && curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh \
     && bash nodesource_setup.sh \
     && apt-get install -y nodejs \
@@ -40,22 +38,18 @@ RUN apt update \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm -rf /var/cache/oracle-jdk8-installer
-
-# Install Android SDK
     && cd /opt \
     && wget --output-document=android-sdk.tgz --quiet http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz \
     && tar xzf android-sdk.tgz \
     && rm -f android-sdk.tgz \
     && chown -R root. /opt
 
-# Setup environment
-
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/tools
 
-# Install sdk elements
+#UPDATE SDK
 COPY tools /opt/tools
 
-RUN chmod -R 777 /opt/tools/android-accept-licenses.sh
+RUN chmod -R +x /opt/tools/android-accept-licenses.sh
 
 RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --all --no-ui --filter platform-tools,tools,build-tools-23.0.2,android-23,extra-android-support,extra-android-m2repository,extra-google-m2repository"]
 RUN unzip ${ANDROID_HOME}/temp/*.zip -d ${ANDROID_HOME}
