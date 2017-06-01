@@ -28,14 +28,13 @@ RUN apt update \
 
 #JAVA STUFF
     && add-apt-repository ppa:webupd8team/java -y \
-    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/ \
-    && debconf-set-selections \
+    && echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/&& debconf-set-selections \
     && apt update && apt -y install oracle-java7-installer \
 
 #ANDROID STUFF
     && echo ANDROID_HOME="${ANDROID_HOME}" >> /etc/environment \
     && dpkg --add-architecture i386 \
-    && apt update && \
+    && apt update \
     && apt install -y --force-yes expect ant wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 qemu-kvm kmod \
     && apt clean \
     && apt autoclean \
