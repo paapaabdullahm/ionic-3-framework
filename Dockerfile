@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     CORDOVA_VERSION=7.0.0
 
 #BASIC STUFF
-RUN apt update \
+RUN apt-get update \
     && apt-get install -y python-software-properties software-properties-common build-essential git wget curl unzip ruby \
     && git config --global user.email "paapaabdullahm@gmail.com" \
     && git config --global user.name "Paapa Abdullah Morgan" \
@@ -37,7 +37,7 @@ RUN apt update \
     && apt-get clean \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && rm -rf /var/cache/oracle-jdk8-installer
+    && rm -rf /var/cache/oracle-jdk8-installer \
     && cd /opt \
     && wget --output-document=android-sdk.tgz --quiet http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz \
     && tar xzf android-sdk.tgz \
