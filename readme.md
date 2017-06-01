@@ -1,1 +1,1 @@
-# Inonic Framework based on netizy/ionic-2
+# Inonic Framework based on Ubuntu 16.04
